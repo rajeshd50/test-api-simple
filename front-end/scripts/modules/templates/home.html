@@ -1,0 +1,23 @@
+<div layout="column" ng-cloak>
+    <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Home</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+        <div class="list-container">
+            <md-list>
+                <md-list-item class="md-2-line" ng-repeat="user in vm.userList">
+                    <div class="md-list-item-text">
+                        <h3 ng-bind="user.user_name"></h3>
+                        <p ng-bind="user.user_details"></p>
+                    </div>
+                    <md-button ng-click="vm.deleteUser(user)">Delete</md-button>
+                </md-list-item>
+            </md-list>
+            <div ng-if="vm.userList.length<1" style="text-align: center;"> 
+                No user found... !!
+            </div>
+        </div>
+    </md-content>
+</div>

@@ -1,0 +1,25 @@
+<div layout="column" ng-cloak>
+    <div flex>
+        <md-menu>
+            <md-button class="md-raised md-primary" ng-click="vm.openMenu($mdOpenMenu, $event)">Menu</md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ui-sref="home">
+                        Home
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ui-sref="add">
+                        Add
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+    <div flex>
+        <div layout="row" layout-sm="column" layout-align="space-around" class="loader-container" ng-if="vm.showLoader">
+            <md-progress-circular md-diameter="96" class="loader"></md-progress-circular>
+        </div>
+        <ui-view></ui-view>
+    </div>
+</div>

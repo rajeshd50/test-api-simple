@@ -1,0 +1,22 @@
+<div layout="column" ng-cloak>
+    <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Add</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+        <form>
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="vm.user.name">
+            </md-input-container>
+            <md-input-container>
+                <label>Details</label>
+                <input ng-model="vm.user.details">
+            </md-input-container>
+            <md-button class="md-raised md-primary" style="float:none;display:block;" ng-disabled="!vm.user.name||!vm.user.details" ng-click="vm.addUpdateUser()">
+                Add
+            </md-button>
+        </form>
+    </md-content>
+</div>

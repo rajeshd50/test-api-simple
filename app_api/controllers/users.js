@@ -6,6 +6,7 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+// Get all users
 module.exports.userGet = function (req, res) {
 	// body...
 	User.find()
@@ -14,6 +15,8 @@ module.exports.userGet = function (req, res) {
 		sendJSONresponse(res, 200, data);
 	});
 }
+
+// Get a single user
 module.exports.userSingleGet = function (req, res) {
 	// body...
 	if (req.params && req.params.userid) {
@@ -29,14 +32,19 @@ module.exports.userSingleGet = function (req, res) {
 	}
 }
 
+// Add a new user
 module.exports.userAddNew = function (req, res) {
 	console.log(req.body);
 	User.find({})
 	.sort({"user_id":-1})
 	.limit(1)
 	.exec(function(err,data){
+		var newId = 1;
+		if(data.length>0) {
+			newId = data[0].user_id+1;
+		}
 		User.create({
-			"user_id": (data[0].user_id+1),
+			"user_id": newId,
 			"user_name": req.body.name,
 			"user_details": req.body.details||''
 		},function(err,data){
@@ -47,4 +55,26 @@ module.exports.userAddNew = function (req, res) {
 			}
 		})
 	});
+}
+
+// Delete a single user
+module.exports.userSingleDelete = function (req, res) {
+	// body...
+	if (req.params && req.params.userid) {
+		User.find({"user_id":req.params.userid}).remove()
+		.exec(function(err, data) {
+			// body...
+			sendJSONresponse(res, 200, {message:'Deleted'});
+		});
+	}else {
+		sendJSONresponse(res, 404, {
+	      "message": "No userid in request"
+	    });
+	}
+}
+
+
+// Edit a single user
+module.exports.userSingleEdit = function (req, res) {
+
 }
